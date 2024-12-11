@@ -9,21 +9,30 @@ public class DayToNight : MonoBehaviour
     [SerializeField] private Light sun;
     [SerializeField, Range(0,24)] private float timeOfDay;
     [SerializeField] private float sunRotationSpeed;
+    [SerializeField] private bool cycleGoing;
 	[SerializeField] private Gradient sunColor;
 
 	private float currentTime;
 
-	private void Update() 
+	private void Update()
     {
-        timeOfDay += Time.deltaTime * sunRotationSpeed;
-
-        if (timeOfDay > 24) 
+        if (cycleGoing)
         {
-            timeOfDay = 0;
-        }
+            if (sunRotationSpeed < 1) 
+            {
+                sunRotationSpeed = 1;
+            }
 
-        UpdateSunRotation();
-        UpdateLighting();
+            timeOfDay += Time.deltaTime * sunRotationSpeed;
+
+            if (timeOfDay > 24)
+            {
+                timeOfDay = 0;
+            }
+
+            UpdateSunRotation();
+            UpdateLighting();
+        }
     }
 
     private void OnValidate() 

@@ -12,36 +12,76 @@ public class ChunkManager : MonoBehaviour
 	/// </summary>
 	public static ChunkManager instance;
 
-	public int resolution = 16;
-	public float islandRadius = 900f;
-	private Vector2 worldSize = new Vector2(8f, 8f);
+	public int currentResolution = 16;
+	public float currentIslandRadius = 900f;
 
+	private int pastResolution;
+	private float pastIslandRadius;
+
+	private Vector2 worldSize = new Vector2(8f, 8f);
 
 	public Material Terrain;
 
 	public Vector2 worldCenter;
 
+	private List<GameObject> chunks = new();
+
 	/// <summary>
 	/// Sets the chunk manager instance upon the project starting
 	/// </summary>
-	void Awake() 
+	void Awake()
 	{
 		instance = this;
 	}
 
-	public void Start(){  
+	public void Start()
+	{
 
 		worldCenter = new Vector2((worldSize.x / 2f) * 128, (worldSize.y / 2f) * 128);
+		pastIslandRadius = currentIslandRadius;
+		pastResolution = currentResolution;
+		StartCoroutine(GenerateChunks());
+	}
 
-		GenerateChunks();
+	public void Update() 
+	{
+		if (currentResolution < 1) 
+		{
+			currentResolution = 1;
+		}
+		if (currentResolution != pastResolution) 
+		{
+			pastResolution = currentResolution;
+			UpdateChunks();
+		}
+		if (currentIslandRadius != pastIslandRadius) 
+		{
+			pastIslandRadius = currentIslandRadius;
+			UpdateChunks();
+		}
+	}
+
+	public void UpdateChunks()
+	{
+		ClearChunks();
+		StartCoroutine(GenerateChunks());
+	}
+
+	private void ClearChunks()
+	{
+		foreach (var chunk in chunks)
+		{
+			Destroy(chunk);
+		}
+		chunks.Clear();
 	}
 
 
-	void GenerateChunks() 
+	IEnumerator GenerateChunks()
 	{
-		for (int x = 0; x < worldSize.x; x++) 
+		for (int x = 0; x < worldSize.x; x++)
 		{
-			for (int y = 0; y < worldSize.y; y++) 
+			for (int y = 0; y < worldSize.y; y++)
 			{
 				TerrainMeshGenerator tmg = new();
 				GameObject current = new("Terrain" + (x * y), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
@@ -51,12 +91,14 @@ public class ChunkManager : MonoBehaviour
 				tmg.Init(current);
 				tmg.Generate(Terrain);
 
+				chunks.Add(current);
+				yield return new WaitForSeconds(0.1f);
 			}
 		}
 	}
 }
 
-class TerrainMeshGenerator 
+class TerrainMeshGenerator
 {
 	MeshFilter filter;
 	MeshRenderer renderer;
@@ -69,7 +111,7 @@ class TerrainMeshGenerator
 
 	Vector2 worldCenter = ChunkManager.instance.worldCenter;
 
-	public void Init(GameObject cur) 
+	public void Init(GameObject cur)
 	{
 		filter = cur.GetComponent<MeshFilter>();
 		renderer = cur.GetComponent<MeshRenderer>();
@@ -77,11 +119,11 @@ class TerrainMeshGenerator
 		mesh = new();
 	}
 
-	public void Generate(Material mat) 
+	public void Generate(Material mat)
 	{
 		Vector2 worldPos = new Vector2(filter.gameObject.transform.localPosition.x, filter.gameObject.transform.localPosition.z);
-		int resolution = ChunkManager.instance.resolution;
-		float islandRadius = ChunkManager.instance.islandRadius;
+		int resolution = ChunkManager.instance.currentResolution;
+		float islandRadius = ChunkManager.instance.currentIslandRadius;
 
 		verts = new Vector3[(resolution + 1) * (resolution + 1)];
 		uvs = new Vector2[(verts.Length)];
@@ -107,7 +149,7 @@ class TerrainMeshGenerator
 		}
 
 		//Gets uv data for texture mapping
-		for (int i = 0; i < uvs.Length; i++) 
+		for (int i = 0; i < uvs.Length; i++)
 		{
 			uvs[i] = new Vector2(verts[i].x + worldPos.x, verts[i].z + worldPos.y);
 		}
