@@ -14,9 +14,19 @@ public class ChunkManager : MonoBehaviour
 
 	public int currentResolution = 16;
 	public float currentIslandRadius = 900f;
+	public float islandRadiusNoiseScale = .005f;
+	public float noiseScale = .04f;
+	public float noiseScale2 = .02f;
+	public float noiseScale3 = .007f;
+
+
 
 	private int pastResolution;
 	private float pastIslandRadius;
+	private float pastIslandRadiusNoiseScale;
+	private float pastNoiseScale;
+	private float pastNoiseScale2;
+	private float pastNoiseScale3;
 
 	private Vector2 worldSize = new Vector2(8f, 8f);
 
@@ -40,6 +50,10 @@ public class ChunkManager : MonoBehaviour
 		worldCenter = new Vector2((worldSize.x / 2f) * 128, (worldSize.y / 2f) * 128);
 		pastIslandRadius = currentIslandRadius;
 		pastResolution = currentResolution;
+		pastIslandRadiusNoiseScale = islandRadiusNoiseScale;
+		pastNoiseScale = noiseScale;
+		pastNoiseScale2 = noiseScale2;
+		pastNoiseScale3 = noiseScale3;
 		StartCoroutine(GenerateChunks());
 	}
 
@@ -57,6 +71,26 @@ public class ChunkManager : MonoBehaviour
 		if (currentIslandRadius != pastIslandRadius) 
 		{
 			pastIslandRadius = currentIslandRadius;
+			UpdateChunks();
+		}
+		if (islandRadiusNoiseScale != pastIslandRadiusNoiseScale)
+		{
+			pastIslandRadiusNoiseScale = islandRadiusNoiseScale;
+			UpdateChunks();
+		}
+		if (noiseScale != pastNoiseScale)
+		{
+			pastNoiseScale = noiseScale;
+			UpdateChunks();
+		}
+		if (noiseScale2 != pastNoiseScale2)
+		{
+			pastNoiseScale2 = noiseScale2;
+			UpdateChunks();
+		}
+		if (noiseScale3 != pastNoiseScale3)
+		{
+			pastNoiseScale3 = noiseScale3;
 			UpdateChunks();
 		}
 	}
@@ -89,7 +123,7 @@ public class ChunkManager : MonoBehaviour
 				current.transform.localPosition = new Vector3(x * 128f, 0, y * 128f);
 
 				tmg.Init(current);
-				tmg.Generate(Terrain);
+				tmg.Generate(Terrain,islandRadiusNoiseScale, noiseScale, noiseScale2, noiseScale3);
 
 				chunks.Add(current);
 				yield return new WaitForSeconds(0.1f);
@@ -119,7 +153,7 @@ class TerrainMeshGenerator
 		mesh = new();
 	}
 
-	public void Generate(Material mat)
+	public void Generate(Material mat, float islandRadiusScale, float noiseScale1, float noiseScale2, float noiseScale3)
 	{
 		Vector2 worldPos = new Vector2(filter.gameObject.transform.localPosition.x, filter.gameObject.transform.localPosition.z);
 		int resolution = ChunkManager.instance.currentResolution;
@@ -138,10 +172,10 @@ class TerrainMeshGenerator
 
 				float distance = Vector2.Distance(worldCenter, vertexWorldPos);
 				float sin = Mathf.Sin(Mathf.Clamp(((1 + distance) / islandRadius), 0f, 1f) + 90f);
-				float islandMultiplier = sin * Mathf.PerlinNoise(vertexWorldPos.x * 0.005f, vertexWorldPos.y * 0.005f);
-				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * 0.04f, vertexWorldPos.y * .04f) * .5f * sin;
-				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * 0.02f, vertexWorldPos.y * .02f) * .3f * sin;
-				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * 0.007f, vertexWorldPos.y * .007f) * .3f * sin;
+				float islandMultiplier = sin * Mathf.PerlinNoise(vertexWorldPos.x * islandRadiusScale, vertexWorldPos.y * 0.005f);
+				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * noiseScale1, vertexWorldPos.y * noiseScale1) * .5f * sin;
+				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * noiseScale2, vertexWorldPos.y * noiseScale2) * .3f * sin;
+				islandMultiplier += Mathf.PerlinNoise(vertexWorldPos.x * noiseScale3, vertexWorldPos.y * noiseScale3) * .3f * sin;
 				float y = islandMultiplier * 150f;
 				verts[i] = new Vector3(x * (128f / resolution), y, z * (128f / resolution));
 				i++;
