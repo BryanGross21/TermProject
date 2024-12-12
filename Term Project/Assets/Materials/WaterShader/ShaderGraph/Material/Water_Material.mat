@@ -152,7 +152,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Maximum_Depth: 33.5
+    - _Maximum_Depth: 60
     - _Metallic: 0
     - _Mode: 0
     - _NormalStrength: 0.601

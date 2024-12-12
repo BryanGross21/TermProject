@@ -46,11 +46,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CliffRock:
-        m_Texture: {fileID: 2800000, guid: f9efa60e4a569e24faf0fffda9eac3a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 821f0524efb1a1b47bcdc5099fb0a627, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CliffRockNormal:
-        m_Texture: {fileID: 2800000, guid: 8ab3ab92c11919f42ac1811585ba0ef7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d65e1fc910cfe1478b7f71fca1caebd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Cliff_Rock:
@@ -167,7 +167,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CliffRockHeight: 1
-    - _CliffRockThreshold: 124.19
+    - _CliffRockThreshold: 123.7
     - _Cliff_Rock_Height: 0
     - _Cliff_Rock_Threshold: 0
     - _Cull: 2
@@ -196,7 +196,7 @@ Material:
     - _Rock_Threshold: 0
     - _Rocky_Sand_Height: 3
     - _Rough_Rock_Height: 30
-    - _SandHeight: -101
+    - _SandHeight: 1.68
     - _SandThreshold: 1
     - _Sand_Height: 12
     - _Sand_Threshold: 0.7
