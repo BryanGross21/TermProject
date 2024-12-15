@@ -1,0 +1,2 @@
+Foam and gradient texture from: https://www.youtube.com/watch?v=VMpXSEomAAk&list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak&index=5&ab_channel=BenCloward
+Ripple Normal from: https://www.youtube.com/watch?v=9GCfFKxg9c0&list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak&index=2&ab_channel=BenCloward

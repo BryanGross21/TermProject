@@ -139,6 +139,9 @@
         },
         {
             "m_Id": "8ee66d42ba4f4fa98d9f3994dc4dc417"
+        },
+        {
+            "m_Id": "7fc01e097cf645faa8145e3630932127"
         }
     ],
     "m_StickyNoteDatas": [],
@@ -2323,7 +2326,7 @@
     "m_Type": "UnityEditor.ShaderGraph.CombineNode",
     "m_ObjectId": "6004bfcc81914392a182482f361018f7",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Combine",
     "m_DrawState": {
@@ -2376,7 +2379,7 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "60a323fbda61492bb23d478ccd385b94",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
@@ -2572,7 +2575,7 @@
     "m_Type": "UnityEditor.ShaderGraph.SplitNode",
     "m_ObjectId": "7199d48d90244e3a96182b58b20c98a0",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Split",
     "m_DrawState": {
@@ -2884,6 +2887,17 @@
         "m_SerializableColors": []
     },
     "m_constant": 1
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.GroupData",
+    "m_ObjectId": "7fc01e097cf645faa8145e3630932127",
+    "m_Title": "Normal",
+    "m_Position": {
+        "x": 10.0,
+        "y": 10.0
+    }
 }
 
 {
@@ -3511,7 +3525,7 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "a5ccbce7aafd44febeaf290599738ad4",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
@@ -4092,7 +4106,7 @@
     "m_Type": "UnityEditor.ShaderGraph.OneMinusNode",
     "m_ObjectId": "ce0d2e0949b2405a9636fff751736c59",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "One Minus",
     "m_DrawState": {
@@ -4925,7 +4939,7 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "ed3e137486424c1bbdf26a1bb21b5656",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
@@ -5044,7 +5058,7 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "efcf213bda374cd5974924d12fc570ce",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "7fc01e097cf645faa8145e3630932127"
     },
     "m_Name": "Multiply",
     "m_DrawState": {

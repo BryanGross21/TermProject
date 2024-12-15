@@ -27,10 +27,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 0
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -137,7 +137,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _Depth: 2.3
-    - _Depth_Falloff: 1
+    - _Depth_Falloff: 2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Displacement: 20
@@ -148,11 +148,11 @@ Material:
     - _FoamCutoff: 2.08
     - _FoamSize: 3
     - _FoamSpeed: 1
-    - _Foam_Depth: 12
+    - _Foam_Depth: 5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Maximum_Depth: 60
+    - _Maximum_Depth: 25
     - _Metallic: 0
     - _Mode: 0
     - _NormalStrength: 0.601
